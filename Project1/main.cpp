@@ -5,6 +5,7 @@
 #include "BST.h"
 #include <fstream>
 static const int  MAX_SIZE = 128;
+static const int  ASCII_SIZE = 128;
 using namespace std;
 using namespace Hofman;
 BST* MakeTreeFromFile(const char* fname);
@@ -18,11 +19,24 @@ int main()
 }
 BST* MakeTreeFromFile(const char* fname)
 {
-	int c;
+	int LetterBuckets[ASCII_SIZE];
+	for (int i = 0; i < ASCII_SIZE; i++)
+		LetterBuckets[i] = 0;
+	char c;
 	BST* res = new BST;
 	ifstream inFile;
 	inFile.open(fname);
-	inFile >> c;
-	res->insert(c);
+	inFile >> noskipws >> c;
+	while (!inFile.eof())
+	{
+	LetterBuckets[c]++;
+	inFile >> noskipws >> c;
+	}
+	inFile.close();
+	for (int i = 0; i < ASCII_SIZE; i++)
+	{
+		if (LetterBuckets[i] > 0)
+			res->insert(LetterBuckets[i], i);
+	}
 	return res;
 }

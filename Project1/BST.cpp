@@ -15,18 +15,19 @@ namespace Hofman
             return NULL;
         }
 
-        node* BST::insert(int x, node* t)
+        node* BST::insert(int x, node* t,char c)
         {
             if (t == NULL)
             {
                 t = new node;
-                t->data = x;
+                t->data = c;
+                t->key = x;
                 t->left = t->right = NULL;
             }
-            else if (x < t->data)
-                t->left = insert(x, t->left);
-            else if (x > t->data)
-                t->right = insert(x, t->right);
+            else if (x <= t->key)
+                t->left = insert(x, t->left,c);
+            else if (x > t->key)
+                t->right = insert(x, t->right,c);
             return t;
         }
 
@@ -55,15 +56,15 @@ namespace Hofman
             node* temp;
             if (t == NULL)
                 return NULL;
-            else if (x < t->data)
+            else if (x < t->key)
                 t->left = remove(x, t->left);
-            else if (x > t->data)
+            else if (x > t->key)
                 t->right = remove(x, t->right);
             else if (t->left && t->right)
             {
                 temp = findMin(t->right);
-                t->data = temp->data;
-                t->right = remove(t->data, t->right);
+                t->key = temp->key;
+                t->right = remove(t->key, t->right);
             }
             else
             {
@@ -83,7 +84,7 @@ namespace Hofman
             if (t == NULL)
                 return;
             inorder(t->left);
-            cout << t->data << " ";
+            cout << t->key << " " << "'"<< t->data<<"'" <<endl;
             inorder(t->right);
         }
 
@@ -91,9 +92,9 @@ namespace Hofman
         {
             if (t == NULL)
                 return NULL;
-            else if (x < t->data)
+            else if (x < t->key)
                 return find(t->left, x);
-            else if (x > t->data)
+            else if (x > t->key)
                 return find(t->right, x);
             else
                 return t;
@@ -108,9 +109,9 @@ namespace Hofman
             root = makeEmpty(root);
         }
 
-        void BST::insert(int x)
+        void BST::insert(int x,char c)
         {
-            root = insert(x, root);
+            root = insert(x, root,c);
         }
 
         void BST::remove(int x)

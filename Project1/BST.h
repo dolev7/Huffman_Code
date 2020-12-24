@@ -3,7 +3,8 @@ namespace Hofman
 {
 	struct node 
 	{
-		int data;
+		int key;
+		char data;
 		node* left;
 		node* right;
 	};
@@ -13,7 +14,7 @@ namespace Hofman
 		
 		node* root;
 		node* makeEmpty(node* t);
-		node* insert(int x, node* t);
+		node* insert(int x, node* t,char c);
 		node* findMin(node* t);
 		node* findMax(node* t);
 		node* remove(int x, node* t);
@@ -22,7 +23,7 @@ namespace Hofman
 	public:
 		BST();
 		~BST();
-		void insert(int x);
+		void insert(int x,char c);
 		void remove(int x);
 		void display();
 		void search(int x);
