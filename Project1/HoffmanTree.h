@@ -1,30 +1,26 @@
 #pragma once
 using namespace std;
+#include "BST.h"
 namespace Hofman
 {
-		struct Hnode
-		{
-			int key;
-			char data;
-			Hnode* left;
-			Hnode* right;
-		};
-		class Hoffman
+	struct NumberNode
+	{
+		int sum;
+		node* left;
+		node* right;
+	};
+		class HoffmanTree
 		{
 		private:
-
-			Hnode* root;
-			Hnode* makeEmpty(Hnode* t);
-			Hnode* insert(int x, Hnode* t, char c);
-			void inorder(Hnode* t);
-			Hnode* find(Hnode* t, int x);
+			node* makeEmpty(node* t);
 		public:
-			Hoffman();
-			~Hoffman();
-			void insert(int x, char c);
-			void remove(int x);
-			void display();
-			void search(int x);
+			NumberNode* root;
+		//	void makeEmpty(node* t);
+			void insert(node* root1, node* node2);
+			void inorder(node* t);
+			HoffmanTree(node* root1, node* root2);
+	//		~HoffmanTree();
+	//		void display();
 
 		};
 }

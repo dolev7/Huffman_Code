@@ -3,130 +3,88 @@
 using namespace std;
 namespace Hofman
 {
-    Hnode* HoffmanTree::makeEmpty(Hnode* t)
+    /*node* HoffmanTree::makeEmpty(node* t)
     {
-        if (t == NULL)
-            return NULL;
+        if (t == nullptr)
+            return nullptr;
         {
             makeEmpty(t->left);
             makeEmpty(t->right);
             delete t;
         }
-        return NULL;
-    }
+        return nullptr;
+    }*/
 
-    void HoffmanTree::insert(Hnode* root1,Hnode* node2)
+    /*void HoffmanTree::insert(node* root1,node* root2)
     {
-        if (t == NULL)
+        int rootNum = root1->key + root2->key;
+        if (t == nullptr)
         {
-            t = new Hnode;
+            t = new node;
             t->data = c;
             t->key = x;
-            t->left = t->right = NULL;
+            t->left = t->right = nullptr;
+        }
+        else if (x <= t->key)
+            t->left = insert(x, t->left, c);
+        else if (x > t->key)
+            t->right = insert(x, t->right, c);
+        return t;*/
+    //}
+
+    void HoffmanTree::inorder(node* t)
+    {
+        if (t == nullptr)
+            return;
+        inorder(t->left);
+        cout << t->key << " " << "'" << t->data << "'" << endl;
+        inorder(t->right);
+    }
+    HoffmanTree::HoffmanTree(node* root1, node* root2)
+    {
+        root = new NumberNode;
+        root->left = root1;
+        root->right = root2;
+        root->sum = root1->key+root2->key;
+        if (root1->key <= root2->key)
+        {
+            root->left = root1;
+            root->right = root2;
+        }
+        else
+        {
+            root->left = root2;
+            root->right = root1;
+        }
+    }
+
+    /*HoffmanTree::~HoffmanTree()
+    {
+        root = makeEmpty(root);
+    }*/
+
+    /*void HoffmanTree::insert(int x, char c)
+    {
+        root = insert(x, root, c);
+    }*/
+  /*  void HoffmanTree::display()
+    {
+        inorder(root);
+        cout << endl;
+    }*/
+    /*node* HoffmanTree::insert(int x, node* t, char c)
+    {
+        if (t == nullptr)
+        {
+            t = new node;
+            t->data = c;
+            t->key = x;
+            t->left = t->right = nullptr;
         }
         else if (x <= t->key)
             t->left = insert(x, t->left, c);
         else if (x > t->key)
             t->right = insert(x, t->right, c);
         return t;
-    }
-
-    Hnode* HoffmanTree::findMin(Hnode* t)
-    {
-        if (t == NULL)
-            return NULL;
-        else if (t->left == NULL)
-            return t;
-        else
-            return findMin(t->left);
-    }
-
-    Hnode* HoffmanTree::findMax(Hnode* t)
-    {
-        if (t == NULL)
-            return NULL;
-        else if (t->right == NULL)
-            return t;
-        else
-            return findMax(t->right);
-    }
-
-    Hnode* HoffmanTree::remove(int x, Hnode* t)
-    {
-        Hnode* temp;
-        if (t == NULL)
-            return NULL;
-        else if (x < t->key)
-            t->left = remove(x, t->left);
-        else if (x > t->key)
-            t->right = remove(x, t->right);
-        else if (t->left && t->right)
-        {
-            temp = findMin(t->right);
-            t->key = temp->key;
-            t->right = remove(t->key, t->right);
-        }
-        else
-        {
-            temp = t;
-            if (t->left == NULL)
-                t = t->right;
-            else if (t->right == NULL)
-                t = t->left;
-            delete temp;
-        }
-
-        return t;
-    }
-
-    void HoffmanTree::inorder(Hnode* t)
-    {
-        if (t == NULL)
-            return;
-        inorder(t->left);
-        cout << t->key << " " << "'" << t->data << "'" << endl;
-        inorder(t->right);
-    }
-
-    Hnode* HoffmanTree::find(Hnode* t, int x)
-    {
-        if (t == NULL)
-            return NULL;
-        else if (x < t->key)
-            return find(t->left, x);
-        else if (x > t->key)
-            return find(t->right, x);
-        else
-            return t;
-    }
-    HoffmanTree::HoffmanTree()
-    {
-        root = NULL;
-    }
-
-    HoffmanTree::~HoffmanTree()
-    {
-        root = makeEmpty(root);
-    }
-
-    void HoffmanTree::insert(int x, char c)
-    {
-        root = insert(x, root, c);
-    }
-
-    void HoffmanTree::remove(int x)
-    {
-        root = remove(x, root);
-    }
-
-    void HoffmanTree::display()
-    {
-        inorder(root);
-        cout << endl;
-    }
-
-    void HoffmanTree::search(int x)
-    {
-        root = find(root, x);
-    }
+    }*/
 }

@@ -5,24 +5,24 @@ namespace Hofman
 {
        node* BST::makeEmpty(node* t) 
         {
-            if (t == NULL)
-                return NULL;
+            if (t == nullptr)
+                return nullptr;
             {
                 makeEmpty(t->left);
                 makeEmpty(t->right);
                 delete t;
             }
-            return NULL;
+            return nullptr;
         }
 
         node* BST::insert(int x, node* t,char c)
         {
-            if (t == NULL)
+            if (t == nullptr)
             {
                 t = new node;
                 t->data = c;
                 t->key = x;
-                t->left = t->right = NULL;
+                t->left = t->right = nullptr;
             }
             else if (x <= t->key)
                 t->left = insert(x, t->left,c);
@@ -30,22 +30,33 @@ namespace Hofman
                 t->right = insert(x, t->right,c);
             return t;
         }
-
+        node* BST::findAndDelMin()
+        {
+            return findMin(root);
+        }
         node* BST::findMin(node* t)
         {
-            if (t == NULL)
-                return NULL;
-            else if (t->left == NULL)
-                return t;
+            if (t == nullptr)
+                return nullptr;
+            else if (t->left == nullptr)
+            {
+                node* res = new node;
+                res->left = nullptr;
+                res->right = nullptr;
+                res->data = t->data;
+                res->key = t->key;
+                remove(t->key);
+                return res;
+            }
             else
                 return findMin(t->left);
         }
 
         node* BST::findMax(node* t)
         {
-            if (t == NULL)
-                return NULL;
-            else if (t->right == NULL)
+            if (t == nullptr)
+                return nullptr;
+            else if (t->right == nullptr)
                 return t;
             else
                 return findMax(t->right);
@@ -54,9 +65,9 @@ namespace Hofman
         node* BST::remove(int x, node* t)
         {
             node* temp;
-            if (t == NULL)
-                return NULL;
-            else if (x < t->key)
+            if (t == nullptr)
+                return nullptr;
+            else if (x<t->key || x==t->key && t->left)
                 t->left = remove(x, t->left);
             else if (x > t->key)
                 t->right = remove(x, t->right);
@@ -69,9 +80,9 @@ namespace Hofman
             else
             {
                 temp = t;
-                if (t->left == NULL)
+                if (t->left == nullptr)
                     t = t->right;
-                else if (t->right == NULL)
+                else if (t->right == nullptr)
                     t = t->left;
                 delete temp;
             }
@@ -81,7 +92,7 @@ namespace Hofman
 
         void BST::inorder(node* t)
         {
-            if (t == NULL)
+            if (t == nullptr)
                 return;
             inorder(t->left);
             cout << t->key << " " << "'"<< t->data<<"'" <<endl;
@@ -90,8 +101,8 @@ namespace Hofman
 
         node* BST::find(node* t, int x) 
         {
-            if (t == NULL)
-                return NULL;
+            if (t == nullptr)
+                return nullptr;
             else if (x < t->key)
                 return find(t->left, x);
             else if (x > t->key)
@@ -101,7 +112,7 @@ namespace Hofman
         }
         BST::BST() 
         {
-            root = NULL;
+            root = nullptr;
         }
 
         BST::~BST()
