@@ -21,12 +21,15 @@
     <ClCompile Include="BST.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HoffmanTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header.h">
+    <ClInclude Include="BST.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BST.h">
+    <ClInclude Include="HoffmanTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
