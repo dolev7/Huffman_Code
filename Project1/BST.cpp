@@ -20,17 +20,21 @@ namespace Hofman
             if (t == nullptr)
             {
                 t = new node;
-                t->data = c;
-                t->key = x;
+                t->_letter = c;
+                t->_frequency = x;
                 t->left = t->right = nullptr;
             }
-            else if (x <= t->key)
+            else if (x <= t->_frequency)
                 t->left = insert(x, t->left,c);
-            else if (x > t->key)
+            else if (x > t->_frequency)
                 t->right = insert(x, t->right,c);
             return t;
         }
         node* BST::findAndDelMin()
+        {
+            return findMin(root);
+        }
+        node* BST::findMinimum()
         {
             return findMin(root);
         }
@@ -40,13 +44,13 @@ namespace Hofman
                 return nullptr;
             else if (t->left == nullptr)
             {
-                node* res = new node;
-                res->left = nullptr;
-                res->right = nullptr;
-                res->data = t->data;
-                res->key = t->key;
-                remove(t->key);
-                return res;
+                //node* res = new node;
+                //res->left = nullptr;
+                //res->right = nullptr;
+                //res->_letter = t->_letter;
+                //res->_frequency = t->_frequency;
+           //     remove(t->_frequency);
+                return t;
             }
             else
                 return findMin(t->left);
@@ -67,15 +71,15 @@ namespace Hofman
             node* temp;
             if (t == nullptr)
                 return nullptr;
-            else if (x<t->key || x==t->key && t->left)
+            else if (x<t->_frequency || x==t->_frequency && t->left)
                 t->left = remove(x, t->left);
-            else if (x > t->key)
+            else if (x > t->_frequency)
                 t->right = remove(x, t->right);
             else if (t->left && t->right)
             {
                 temp = findMin(t->right);
-                t->key = temp->key;
-                t->right = remove(t->key, t->right);
+                t->_frequency = temp->_frequency;
+                t->right = remove(t->_frequency, t->right);
             }
             else
             {
@@ -95,7 +99,7 @@ namespace Hofman
             if (t == nullptr)
                 return;
             inorder(t->left);
-            cout << t->key << " " << "'"<< t->data<<"'" <<endl;
+            cout << t->_frequency << " " << "'"<< t->_letter<<"'" <<endl;
             inorder(t->right);
         }
 
@@ -103,9 +107,9 @@ namespace Hofman
         {
             if (t == nullptr)
                 return nullptr;
-            else if (x < t->key)
+            else if (x < t->_frequency)
                 return find(t->left, x);
-            else if (x > t->key)
+            else if (x > t->_frequency)
                 return find(t->right, x);
             else
                 return t;

@@ -3,8 +3,8 @@ namespace Hofman
 {
 	struct node 
 	{
-		int key;
-		char data;
+		int _frequency;
+		char _letter;
 		node* left;
 		node* right;
 	};
@@ -29,6 +29,7 @@ namespace Hofman
 		void display();
 		void search(int x);
 		bool isEmpty() { if (root) return false; else return true;}
-		
+		node* findMinimum();
+		node* getroot()const { return root; }
 	};
 }
