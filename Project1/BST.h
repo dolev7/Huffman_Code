@@ -14,20 +14,20 @@ namespace Hofman
 		
 		node* root;
 		node* makeEmpty(node* t);
-		node* insert(int x, node* t,char c);
+		node* RecInsert(char x, node* t);
 		node* findMax(node* t);
-		node* remove(int x, node* t);
+		node* remove(char x, node* t);
 		void inorder(node* t);
-		node* find(node* t, int x);
+		node* find(node* t, char x);
 		node* findMin(node* t);
 	public:
 		BST();
 		~BST();
-		node* findAndDelMin();
-		void insert(int x,char c);
-		void remove(int x);
+		node* findMin();
+		void Insert(char x);
+		void remove(char x);
 		void display();
-		void search(int x);
+		void search(char x);
 		bool isEmpty() { if (root) return false; else return true;}
 		node* findMinimum();
 		node* getroot()const { return root; }

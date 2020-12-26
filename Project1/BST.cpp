@@ -15,41 +15,35 @@ namespace Hofman
             return nullptr;
         }
 
-        node* BST::insert(int x, node* t,char c)
+        node* BST::RecInsert(char x, node* t)
         {
             if (t == nullptr)
             {
                 t = new node;
-                t->_letter = c;
-                t->_frequency = x;
+                t->_letter = x;
+                t->_frequency = 1;
                 t->left = t->right = nullptr;
             }
-            else if (x <= t->_frequency)
-                t->left = insert(x, t->left,c);
-            else if (x > t->_frequency)
-                t->right = insert(x, t->right,c);
+            else if (x <= t->_letter)
+                t->left = RecInsert(x, t->left);
+            else if (x > t->_letter)
+                t->right = RecInsert(x, t->right);
             return t;
         }
-        node* BST::findAndDelMin()
+        node* BST::findMin()
         {
             return findMin(root);
         }
-        node* BST::findMinimum()
+        /*node* BST::findMinimum()
         {
             return findMin(root);
-        }
+        }*/
         node* BST::findMin(node* t)
         {
             if (t == nullptr)
                 return nullptr;
             else if (t->left == nullptr)
-            {
-                //node* res = new node;
-                //res->left = nullptr;
-                //res->right = nullptr;
-                //res->_letter = t->_letter;
-                //res->_frequency = t->_frequency;
-           //     remove(t->_frequency);
+            {       
                 return t;
             }
             else
@@ -66,20 +60,20 @@ namespace Hofman
                 return findMax(t->right);
         }
 
-        node* BST::remove(int x, node* t)
+        node* BST::remove(char x, node* t)
         {
             node* temp;
             if (t == nullptr)
                 return nullptr;
-            else if (x<t->_frequency || x==t->_frequency && t->left)
+            else if (x<t->_letter || x==t->_letter && t->left)
                 t->left = remove(x, t->left);
-            else if (x > t->_frequency)
+            else if (x > t->_letter)
                 t->right = remove(x, t->right);
             else if (t->left && t->right)
             {
                 temp = findMin(t->right);
-                t->_frequency = temp->_frequency;
-                t->right = remove(t->_frequency, t->right);
+                t->_letter = temp->_letter;
+                t->right = remove(t->_letter, t->right);
             }
             else
             {
@@ -99,17 +93,17 @@ namespace Hofman
             if (t == nullptr)
                 return;
             inorder(t->left);
-            cout << t->_frequency << " " << "'"<< t->_letter<<"'" <<endl;
+            cout << t->_frequency << " " << "'"<< t->_letter <<"'" <<endl;
             inorder(t->right);
         }
 
-        node* BST::find(node* t, int x) 
+        node* BST::find(node* t, char x) 
         {
             if (t == nullptr)
                 return nullptr;
-            else if (x < t->_frequency)
+            else if (x < t->_letter)
                 return find(t->left, x);
-            else if (x > t->_frequency)
+            else if (x > t->_letter)
                 return find(t->right, x);
             else
                 return t;
@@ -124,14 +118,18 @@ namespace Hofman
             root = makeEmpty(root);
         }
 
-        void BST::insert(int x,char c)
+        void BST::Insert(char c)
         {
-            root = insert(x, root,c);
+            node* found=find(root, c);
+            if (found)
+                (found->_frequency)++;
+            else
+            root = RecInsert(c,root);
         }
 
-        void BST::remove(int x)
+        void BST::remove(char c)
         {
-            root = remove(x, root);
+            root = remove(c, root);
         }
 
         void BST::display()
@@ -140,8 +138,8 @@ namespace Hofman
             cout << endl;
         }
 
-        void BST::search(int x) 
+        void BST::search(char c) 
         {
-            root = find(root, x);
+            root = find(root, c);
         }
 }

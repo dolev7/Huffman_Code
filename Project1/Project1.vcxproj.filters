@@ -21,10 +21,10 @@
     <ClCompile Include="BST.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HoffmanNode.cpp">
+    <ClCompile Include="minHeap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="minHeap.cpp">
+    <ClCompile Include="HoffmanTree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,10 +32,10 @@
     <ClInclude Include="BST.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HoffmanNode.h">
+    <ClInclude Include="minHeap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="minHeap.h">
+    <ClInclude Include="HoffmanTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
