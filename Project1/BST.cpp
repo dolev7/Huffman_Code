@@ -82,6 +82,7 @@ namespace Hofman
                     t = t->right;
                 else if (t->right == nullptr)
                     t = t->left;
+                size--;
                 delete temp;
             }
 
@@ -110,6 +111,7 @@ namespace Hofman
         }
         BST::BST() 
         {
+            size = 0;
             root = nullptr;
         }
 
@@ -124,7 +126,10 @@ namespace Hofman
             if (found)
                 (found->_frequency)++;
             else
-            root = RecInsert(c,root);
+            {
+                root = RecInsert(c, root);
+                size++;
+            }
         }
 
         void BST::remove(char c)

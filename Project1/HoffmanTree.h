@@ -20,7 +20,8 @@ namespace Hofman
 			int getRightFreq() const { return right->_frequency; }
 			int getFreq ()const { return _frequency; }
 			char getLetter()const { return _letter; }
-			void setFreq(int toset) { _frequency = toset; }
+			void setFreq(const int toset) { _frequency = toset; }
+			void setLetter(const char toset) { _letter = toset; }
 			void setLeft(HoffmanNode* Left) { left = Left; Left->parent = this; }
 			void setRight(HoffmanNode* Right) { right = Right; Right->parent = this; };
 			void remove();

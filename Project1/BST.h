@@ -11,7 +11,7 @@ namespace Hofman
 	class BST
 	{
 	private:
-		
+		int size;
 		node* root;
 		node* makeEmpty(node* t);
 		node* RecInsert(char x, node* t);
@@ -30,6 +30,7 @@ namespace Hofman
 		void search(char x);
 		bool isEmpty() { if (root) return false; else return true;}
 		node* findMinimum();
+		const int getSize()const { return size; }
 		node* getroot()const { return root; }
 	};
 }

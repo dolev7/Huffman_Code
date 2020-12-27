@@ -27,7 +27,12 @@ namespace Hofman
 			else if (parent->right == this)
 			parent->right = nullptr;
 		}
+		delete this;
+		if (parent)
+		{
+			if (parent->isLeaf())
+				parent->remove();
+		}
 		
-		 delete this;
 	}
 }
