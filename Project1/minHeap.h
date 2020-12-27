@@ -11,8 +11,11 @@ namespace Hofman
 		
 		vector< HoffmanNode> Array;
 		int size;
-		// get parent get left get right?
-		void fixHeap();
+		const int Parent(int node);
+		const int Left(int node);
+		const int Right(int node);
+		void fixHeap(int node);
+		void floydBuild();
 	public:
 		minHeap(BST* searchtree);
 		~minHeap() {};
