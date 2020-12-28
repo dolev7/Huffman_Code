@@ -3,20 +3,34 @@
 using namespace std;
 namespace Hofman
 {
-	minHeap::minHeap(BST* searchtree)
+	minHeap::minHeap(HoffmanNode** unsortedarr,int size)
 	{
-		size = searchtree->getSize();
-		data = new HoffmanNode * [size];
-		node* currentMin;
-		HoffmanNode* current;
-		for (int i = 0; i < size; i++)//fill the heap array from the BST.
-		{
-			currentMin = searchtree->findMin();
-			current = new HoffmanNode(currentMin->_letter, currentMin->_frequency);
-			data[i] = current;
-			searchtree->remove(currentMin->_letter);
-		}
+		allocated = false;
+		maxSize = this->size = size;
+		data = unsortedarr;
+		this->size = size;
 		floydBuild();
+	}
+	minHeap::~minHeap()
+	{
+		makeEmpty();
+	}
+	void minHeap::makeEmpty()
+	{
+		if (allocated)
+		{
+			for (int i = 0; i < size; i++)
+				delete data[i];
+			delete[]data;
+		}
+		data = nullptr;
+		size = 0;
+	}
+	bool minHeap::isEmpty()
+	{
+		if (size == 0)
+			return true;
+		else return false;
 	}
 	void  minHeap::floydBuild()
 	{
@@ -25,6 +39,11 @@ namespace Hofman
 	}
 	void minHeap::Insert(HoffmanNode* toinsert)
 	{
+		if (size == maxSize)
+		{
+			cout << "input error";
+			exit(0);
+		}
 		int i = size;
 		size++;
 		while (i > 0 && data[Parent(i)]->getFreq() > toinsert->getFreq())

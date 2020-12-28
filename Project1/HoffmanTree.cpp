@@ -33,6 +33,5 @@ namespace Hofman
 			if (parent->isLeaf())
 				parent->remove();
 		}
-		
 	}
 }

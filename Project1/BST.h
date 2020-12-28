@@ -13,24 +13,22 @@ namespace Hofman
 	private:
 		int size;
 		node* root;
-		node* makeEmpty(node* t);
+		node* makeEmptyRec(node* t);
 		node* RecInsert(char x, node* t);
-		node* findMax(node* t);
 		node* remove(char x, node* t);
 		void inorder(node* t);
-		node* find(node* t, char x);
-		node* findMin(node* t);
+		node* findRec(node* t, char x);
+		node* findMinRec(node* t);
 	public:
 		BST();
 		~BST();
 		node* findMin();
 		void Insert(char x);
 		void remove(char x);
-		void display();
-		void search(char x);
+		void find(char x);
 		bool isEmpty() { if (root) return false; else return true;}
-		node* findMinimum();
 		const int getSize()const { return size; }
 		node* getroot()const { return root; }
+		void makeEmpty();
 	};
 }

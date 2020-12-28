@@ -3,18 +3,17 @@
 using namespace std;
 namespace Hofman
 {
-       node* BST::makeEmpty(node* t) 
+       node* BST::makeEmptyRec(node* t) 
         {
             if (t == nullptr)
                 return nullptr;
             {
-                makeEmpty(t->left);
-                makeEmpty(t->right);
+                makeEmptyRec(t->left);
+                makeEmptyRec(t->right);
                 delete t;
             }
             return nullptr;
         }
-
         node* BST::RecInsert(char x, node* t)
         {
             if (t == nullptr)
@@ -32,13 +31,9 @@ namespace Hofman
         }
         node* BST::findMin()
         {
-            return findMin(root);
+            return findMinRec(root);
         }
-        /*node* BST::findMinimum()
-        {
-            return findMin(root);
-        }*/
-        node* BST::findMin(node* t)
+        node* BST::findMinRec(node* t)
         {
             if (t == nullptr)
                 return nullptr;
@@ -47,17 +42,7 @@ namespace Hofman
                 return t;
             }
             else
-                return findMin(t->left);
-        }
-
-        node* BST::findMax(node* t)
-        {
-            if (t == nullptr)
-                return nullptr;
-            else if (t->right == nullptr)
-                return t;
-            else
-                return findMax(t->right);
+                return findMinRec(t->left);
         }
 
         node* BST::remove(char x, node* t)
@@ -71,7 +56,7 @@ namespace Hofman
                 t->right = remove(x, t->right);
             else if (t->left && t->right)
             {
-                temp = findMin(t->right);
+                temp = findMinRec(t->right);
                 t->_letter = temp->_letter;
                 t->right = remove(t->_letter, t->right);
             }
@@ -98,16 +83,20 @@ namespace Hofman
             inorder(t->right);
         }
 
-        node* BST::find(node* t, char x) 
+        node* BST::findRec(node* t, char x) 
         {
             if (t == nullptr)
                 return nullptr;
             else if (x < t->_letter)
-                return find(t->left, x);
+                return findRec(t->left, x);
             else if (x > t->_letter)
-                return find(t->right, x);
+                return findRec(t->right, x);
             else
                 return t;
+        }
+        void BST::find(char c)
+        {
+            root = findRec(root, c);
         }
         BST::BST() 
         {
@@ -117,12 +106,16 @@ namespace Hofman
 
         BST::~BST()
         {
-            root = makeEmpty(root);
+            root = makeEmptyRec(root);
+        }
+        void BST::makeEmpty()
+        {
+            makeEmptyRec(root);
         }
 
         void BST::Insert(char c)
         {
-            node* found=find(root, c);
+            node* found=findRec(root, c);
             if (found)
                 (found->_frequency)++;
             else
@@ -135,16 +128,5 @@ namespace Hofman
         void BST::remove(char c)
         {
             root = remove(c, root);
-        }
-
-        void BST::display()
-        {
-            inorder(root);
-            cout << endl;
-        }
-
-        void BST::search(char c) 
-        {
-            root = find(root, c);
         }
 }
