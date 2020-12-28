@@ -19,10 +19,10 @@ BST* MakeTreeFromFile(const char* fname)
 	inFile.close();
 	return res;
 }
-HoffmanNode** makeArrFromTree(BST* SearchTree,int* psize)
+HoffmanNode** makeArrFromTree(BST* SearchTree,int& psize)
 {
 	int size = SearchTree->getSize();
-	*psize = size;
+	psize = size;
 	HoffmanNode** unsortedArr = new HoffmanNode * [size];//will be deleted before heap is deleted.
 	node* currentMin;
 	HoffmanNode* current;
@@ -38,7 +38,7 @@ HoffmanNode** makeArrFromTree(BST* SearchTree,int* psize)
 HoffmanNode* MakeHoffmanTree(BST* SearchTree)
 {
 	int size;
-	HoffmanNode** unsortedArr = makeArrFromTree(SearchTree,&size);
+	HoffmanNode** unsortedArr = makeArrFromTree(SearchTree,size);
 	minHeap Q(unsortedArr, size);
 	HoffmanNode* current;
 	while (Q.getsize() > 1)
@@ -50,36 +50,47 @@ HoffmanNode* MakeHoffmanTree(BST* SearchTree)
 		Q.Insert(current);
 	}
 	HoffmanNode* res = Q.deleteMin();
-	delete[] unsortedArr;// the array is stored in the heap.
+	delete[] unsortedArr;
 	return res;
 }
 void printCode(HoffmanNode* root, int size)
 {
-	cout << "Character encoding :" << endl;
 	int filesize = 0;
 	int currentCodeSize;
 	vector<char> LetterCode;
-	for (int i = 0; i < size; i++)
+	cout << "Character encoding :" << endl;
+	if (root->isLeaf())//special case were the file has only 1 character. 
 	{
-		LetterCode.clear();
-		currentCodeSize = 0;
-		calcCode(root, &currentCodeSize, LetterCode);
-		cout << endl;
+		LetterCode.push_back('1');
+		currentCodeSize = 1;
+		printLetterCode(root, currentCodeSize, LetterCode);
+		root->remove();
 		filesize += currentCodeSize;
+	}
+	else
+	{
+		for (int i = 0; i < size; i++)
+		{
+			LetterCode.clear();
+			currentCodeSize = 0;
+			calcCode(root, currentCodeSize, LetterCode);
+			filesize += currentCodeSize;
+		}
 	}
 	cout << "Encoded file weight: " << filesize << " bits" << endl;
 }
-void printLetterCode(HoffmanNode* current, int* codedLetterSize, vector <char> LetterCode)
+void printLetterCode(HoffmanNode* current, int& codedLetterSize, vector <char> LetterCode)
 {
 	if (current->getLetter() != '\n')
 		cout << "'" << current->getLetter() << "' - ";
 	else
 		cout << "'\\n' - ";
-	(*codedLetterSize) *= current->getFreq();
+	codedLetterSize *= current->getFreq();
 	for (int i = 0; i < LetterCode.size(); i++)
 		cout << LetterCode[i];
+	cout << endl;
 }
-void calcCode(HoffmanNode* current, int* codedLetterSize, vector <char> LetterCode)
+void calcCode(HoffmanNode* current, int& codedLetterSize, vector <char> LetterCode)
 {
 	if (current->isLeaf())
 	{
@@ -90,11 +101,11 @@ void calcCode(HoffmanNode* current, int* codedLetterSize, vector <char> LetterCo
 	if (current->getLeft())
 	{
 		LetterCode.push_back('0');
-		(*codedLetterSize)++;
+		codedLetterSize++;
 		calcCode(current->getLeft(), codedLetterSize, LetterCode);
 		return;
 	}//else has right
-	(*codedLetterSize)++;
+	codedLetterSize++;
 	LetterCode.push_back('1');
 	calcCode(current->getRight(), codedLetterSize, LetterCode);
 }
