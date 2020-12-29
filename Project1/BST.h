@@ -26,7 +26,7 @@ namespace Hofman
 		void Insert(char x);
 		void remove(char x);
 		void find(char x);
-		bool isEmpty() { if (root) return false; else return true;}
+		bool isEmpty()const { if (root) return false; else return true;}
 		const int getSize()const { return size; }
 		node* getroot()const { return root; }
 		void makeEmpty();

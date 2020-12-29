@@ -143,13 +143,13 @@
     <ClCompile Include="HoffmanTree.cpp" />
     <ClCompile Include="io_manager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="minHeap.cpp" />
+    <ClCompile Include="PriorityQueue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BST.h" />
     <ClInclude Include="HoffmanTree.h" />
     <ClInclude Include="mainHead.h" />
-    <ClInclude Include="minHeap.h" />
+    <ClInclude Include="PriorityQueue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

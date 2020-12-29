@@ -4,14 +4,14 @@
 #include <string.h>
 #include "BST.h"
 #include "HoffmanTree.h"
-#include "minHeap.h"
+#include "PriorityQueue.h"
 #include <vector>
 #include <fstream>
 #include <stdlib.h>
 static const int  MAX_SIZE = 128;
 using namespace std;
 using namespace Hofman;
-BST* MakeTreeFromFile(const char* fname);
+BST* MakeTreeFromFile(const char* fileName);
 HoffmanNode* MakeHoffmanTree(BST* SearchTree);
 void printCode(HoffmanNode* root, int size);
 void calcCode(HoffmanNode* current, int& codedLetterSize, vector <char> LetterCode);

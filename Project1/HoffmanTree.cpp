@@ -11,7 +11,7 @@ namespace Hofman
 		this->_frequency = frequency;
 		this->_letter = letter;
 	}
-	bool HoffmanNode::isLeaf()
+	bool HoffmanNode::isLeaf()const 
 	{
 		if (left == nullptr && right == nullptr)
 			return true;

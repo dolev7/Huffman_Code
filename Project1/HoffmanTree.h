@@ -25,6 +25,6 @@ namespace Hofman
 			void setLeft(HoffmanNode* Left) { left = Left; Left->parent = this; }
 			void setRight(HoffmanNode* Right) { right = Right; Right->parent = this; };
 			void remove();
-			bool isLeaf();
+			bool isLeaf()const;
 		};
 }
